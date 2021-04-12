@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,7 +9,7 @@ namespace CreditWorks.Controllers
 {
     public class CategoryController : Controller
     {
-        public ActionResult index()
+        public ActionResult Index()
         {
             CreditWorksEntities db = new CreditWorksEntities();
             ViewData.Model = db.Vehicle_Category.ToList();
@@ -17,7 +17,7 @@ namespace CreditWorks.Controllers
             return View();
         }
 
-        public ActionResult edit(int id)
+        public ActionResult Edit(int id)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace CreditWorks.Controllers
                 if (category == null)
                     return RedirectToAction("error", "Category");
 
-                bool isOverlap = overlapRange(category.RangeMin, category.RangeMax);
+                bool isOverlap = OverlapRange(category.RangeMin, category.RangeMax);
 
                 if (isOverlap)
                     return RedirectToAction("error", "Category");
@@ -65,7 +65,7 @@ namespace CreditWorks.Controllers
             }
         }
 
-        public ActionResult error()
+        public ActionResult Error()
         {
             return View();
         }
@@ -103,18 +103,18 @@ namespace CreditWorks.Controllers
             }
         }
 
-        public ActionResult create()
+        public ActionResult Create()
         {
             return View();
         }
 
-        public ActionResult submitForm(Vehicle_Category category)
+        public ActionResult SubmitForm(Vehicle_Category category)
         {
             try
             {
                 CreditWorksEntities db = new CreditWorksEntities();
 
-                bool isOverlap = overlapRange(category.RangeMin, category.RangeMax);
+                bool isOverlap = OverlapRange(category.RangeMin, category.RangeMax);
 
                 if (isOverlap)
                     return RedirectToAction("error", "Category");
@@ -138,7 +138,7 @@ namespace CreditWorks.Controllers
             }
         }
 
-        private static bool overlapRange(int rangeMin, int rangeMax) {
+        private static bool OverlapRange(int rangeMin, int rangeMax) {
             if (rangeMax <= rangeMin) 
                 return true;
             
