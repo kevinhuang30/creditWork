@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,7 +9,7 @@ namespace CreditWorks.Controllers
 {
     public class VehicleInfoController : Controller
     {
-        public ActionResult index()
+        public ActionResult Index()
         {
             CreditWorksEntities db = new CreditWorksEntities();
             ViewData.Model = db.VehicleInfo.ToList();
@@ -17,14 +17,14 @@ namespace CreditWorks.Controllers
             return View();
         }
 
-        public ActionResult create()
+        public ActionResult Create()
         {
             CreditWorksEntities db = new CreditWorksEntities();
             ViewData["manufacturer"] = db.Vehicle_Manufacturer.ToList();
             return View();
         }
 
-        public ActionResult submitForm(VehicleInfo info)
+        public ActionResult SubmitForm(VehicleInfo info)
         {
             try
             {               
@@ -38,7 +38,7 @@ namespace CreditWorks.Controllers
                     }
                 }
                 //can not be created if can not find match Category Id
-                if (info.OwnerName !=null && info.YearOfManufacture != null && info.WeightOfVehicle != null && info.CategoryId != 0)
+                if (info.OwnerName !=null && info.YearOfManufacture != 0 && info.WeightOfVehicle != 0 && info.CategoryId != 0)
                 {
                     db.VehicleInfo.Add(new VehicleInfo()
                     {
